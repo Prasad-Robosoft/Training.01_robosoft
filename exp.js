@@ -23,3 +23,7 @@ function spread(a,b)
 }
 
 spread(...arr)
+
+
+
+console.log('hey its mee')
