@@ -19,7 +19,7 @@ app.use(router)
 port = process.env.port
 
 app.listen(port,()=>{
-    console.log(`listening at port ${port}`)
+    console.log(`listening to the port ${port}`)
 })
 
 mongoose.connect('mongodb://localhost:27017').then(()=>{
