@@ -26,4 +26,3 @@ spread(...arr)
 
 
 
-console.log('hey its mee')
