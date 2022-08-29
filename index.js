@@ -16,14 +16,14 @@ app.use(helmet())
 
 app.use(router)
 
-port = process.env.port
+port = process.env.PORT
 
 app.listen(port,()=>{
-    console.log(`listening to the port ${port}`)
+        console.log(`listening to the port ${port}`)
 })
 
-mongoose.connect('mongodb://localhost:27017').then(()=>{
-    console.log('connencted to db')
+mongoose.connect(process.env.MONGO_URL).then(()=>{
+        console.log('connencted to db')
 }
 )
 
