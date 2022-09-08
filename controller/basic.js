@@ -1,4 +1,5 @@
 const { connect } = require("mongoose")
+const adminModel = require('../Model/adminModel')
 
 exports.saywelcome = (req,res)=>{
     res.send('first day at robosoft')
@@ -208,7 +209,27 @@ exports.spreadRest = (req,res)=>{           //Rest and spread
 }
 
 
+exports.createAdmin = async(req,res)=>{
+    try {
+            const createAdmin = await adminModel.create({
+                adminName: req.body.adminName,
+                password: req.body.password
+            })
+            res.send("admin created")
+    } catch (error) {
+        res.send(error.message)
+    }
+}
 
+exports.updatePassword = async(req,res)=>{
+    try {
+        await adminModel.updateOne({
+            adminName: req.body.name
+        })
+    } catch (error) {
+        res.send(err.message)
+    }
+}
 
 
 

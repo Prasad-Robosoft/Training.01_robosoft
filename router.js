@@ -2,6 +2,8 @@ const express = require('express')
 const router  = express.Router()
 const app = require('./index')
 const {saywelcome,calculate,findGreatest,seniorCitizen,frameSentence,cgpaToPercent,learnStrict,learnLopp,learnDates,regExp,spreadRest} = require('./controller/basic')
+const {createAdmin,updatePassword,updateManyPassword,insertManyAdmin,findReplace,deleteOne} = require('./controller/adminControl')
+const {createUser,incrementBalance} = require('./controller/userControl')
 
 router.route('/').get(saywelcome)
 router.route('/calculator').post(calculate)
@@ -14,5 +16,15 @@ router.route('/learnLoop').post(learnLopp)
 router.route('/learnDates').get(learnDates)
 router.route('/regExp').post(regExp)
 router.route('/spreadRest').post(spreadRest)
+
+router.route('/createAdmin').post(createAdmin)
+router.route('/updatePassword').post(updatePassword)
+router.route('/updateManyPassword').post(updateManyPassword)
+router.route('/insertManyAdmin').post(insertManyAdmin)
+router.route('/findReplace').post(findReplace)
+router.route('/deleteOne').post(deleteOne)
+
+router.route('/createUser').post(createUser)
+router.route('/balanaceIncrement').post(incrementBalance)
 
 module.exports = router

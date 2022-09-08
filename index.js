@@ -25,6 +25,6 @@ app.listen(port,()=>{
 mongoose.connect(process.env.MONGO_URL).then(()=>{
         console.log('connencted to db')
 }
-)
+) 
 
 module.exports = app
