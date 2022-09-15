@@ -3,7 +3,9 @@ const router  = express.Router()
 const app = require('./index')
 const {saywelcome,calculate,findGreatest,seniorCitizen,frameSentence,cgpaToPercent,learnStrict,learnLopp,learnDates,regExp,spreadRest} = require('./controller/basic')
 const {createAdmin,updatePassword,updateManyPassword,insertManyAdmin,findReplace,deleteOne} = require('./controller/adminControl')
-const {createUser,incrementBalance,findUser,filterUser,addAddress} = require('./controller/userControl')
+const {createUser,incrementBalance,findUser,filterUser,addAddress,compareDate,updateAddress,learnAggrigate} = require('./controller/userControl')
+const{createLoan,findUserLoan}=require('./controller/loanControl')
+const { route} = require('./index')
 
 router.route('/').get(saywelcome)
 router.route('/calculator').post(calculate)
@@ -29,5 +31,11 @@ router.route('/balanaceIncrement').post(incrementBalance)
 router.route('/addAddress').post(addAddress)
 router.route('/findUser').post(findUser)
 router.route('/filterUser').get(filterUser)
+router.route('/compareDate').post(compareDate)
+router.route('/updateAddress').put(updateAddress)
+router.route('/learnAggrigate').post(learnAggrigate)
+
+router.route('/createLoan').post(createLoan)
+router.route('/findUserLoan').post(findUserLoan)
 
 module.exports = router

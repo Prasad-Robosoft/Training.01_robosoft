@@ -9,7 +9,11 @@ const userSchema = mongoose.Schema({
         state: String
 }],
     balance: Number,
-    age: Number
+    age: Number,
+    date: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 module.exports = mongoose.model('userDetails',userSchema)
