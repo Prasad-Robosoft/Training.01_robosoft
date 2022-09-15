@@ -129,7 +129,7 @@ exports.learnAggrigate = async(req,res)=>{
     try {
         const obj_id = "631effb7fb2bc4680cbccead"
             var pipeline = [{
-                $eq: {
+                $match: {
                     userName: req.body.userName
                 }
         },{
@@ -156,3 +156,21 @@ exports.learnAggrigate = async(req,res)=>{
     }
 }
 
+exports.deleteAddress = async(req,res)=>{
+    try {
+        const obj_id = req.body.obj_id
+        await userModel.updateOne({
+            _id: "631b0c7101c845271f162a00"
+        },{
+            $pull: {
+                address: {
+                    location: "Malpe, Manipal",
+                    state: "Karnataka"
+                }
+            }
+        })
+        res.send("deleted")
+    } catch (error) {
+        res.send(error.statement)
+    }
+}
