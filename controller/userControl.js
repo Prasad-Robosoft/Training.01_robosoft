@@ -1,5 +1,7 @@
 const { default: mongoose } = require('mongoose')
 const userModel = require('../Model/userModel')
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
 
 exports.createUser = async(req,res)=>{
     try {
@@ -173,4 +175,16 @@ exports.deleteAddress = async(req,res)=>{
     } catch (error) {
         res.send(error.statement)
     }
+}
+
+exports.login = async(req,res)=>{
+    userName = req.body.user
+    user = {name: userName}
+    const access_token = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+    res.send(access_token)
+}
+
+exports.home= async(req,res,next)=>{
+    res.send(req.user)
+    next()
 }
