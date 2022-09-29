@@ -1,24 +1,43 @@
 const express = require('express')
 const app = express()
 const helmet = require('helmet')
-app.use(express.json())
-
 const middle = require('./middleware/sampleFun')
 const auth = require('./middleware/jwtAuth')
-
-router = require('./router')
-
+const router = require('./router')
 const mongoose = require('mongoose')
-
+const rateLimiter = require('express-rate-limit')
+//const expressUpload = require('express-fileupload')
+const multer = require('multer')
 require('dotenv').config()
 
+const limiter = rateLimiter({
+        max : 5,
+        windowMs: 10000    //10 secs
+})
+
+const fileStorage = multer.diskStorage({
+        destination: (req,file,cb)=>{
+            cb(null,"./uploads")
+        },
+        filename: (req,file,cb)=>{
+            cb(null,Date.now() + "--" + file.originalname)
+        } 
+    })
+
+// app.use(expressUpload({
+//         useTempFiles: true,
+//         tempFileDir: "/temp/"
+// }))
+
+const uploadProfile = multer({storage: fileStorage}).single('profilePic')
+app.use('/upload',uploadProfile)
+app.use(express.json())
 app.use(helmet())
-
 app.use('/learnDates',middle)
-
+app.use(limiter)
 //app.use('/home',auth)
-
 app.use(router)
+
 
 port = process.env.PORT
 

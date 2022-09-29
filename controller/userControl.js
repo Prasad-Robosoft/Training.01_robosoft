@@ -89,7 +89,7 @@ exports.filterUser = async(req,res)=>{
             age: {
                 $nin : 10
             }
-        })
+        }).limit(1)                                         //limits response to only one user
         res.send(filter)
     } catch (error) {
         res.send(error.statement)
@@ -110,11 +110,10 @@ exports.compareDate = async(req,res)=>{
 
 exports.updateAddress = async(req,res)=>{
     try {
-        const id = req.body.id
         const obj_id = req.body.obj_id
         
        const res = await userModel.updateOne({
-        "address._id": "631effb7fb2bc4680cbccead"
+        "address._id": "6321b5f7c0117f102f431111"
        },{
         $set: {
             "address.$.state" : "India"
@@ -183,6 +182,12 @@ exports.login = async(req,res)=>{
     const access_token = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
     res.send(access_token)
 }
+
+exports.upload = async(req,res)=>{
+    console.log(req.file.path)
+    res.send("uploaded")
+}
+
 
 exports.home= async(req,res,next)=>{
     res.send(req.user)
